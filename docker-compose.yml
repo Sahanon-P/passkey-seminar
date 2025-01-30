@@ -1,6 +1,6 @@
 version: "3"
 services:
-  db:
+  postgres:
     image: postgres:13
     environment:
       POSTGRES_DB: passkey
@@ -11,14 +11,16 @@ services:
     volumes:
       - ./data:/var/lib/postgresql/data
     networks:
-      - passkey-network
+      - passkey
   server:
     image: pazcalb/passkey-server:latest
     ports:
       - "3000:3000"
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      RP_ID: ${RP_ID}
+      ORIGIN: ${ORIGIN}
     networks:
-      - passkey-network
-    depends_on:
-      - db
+      - passkey
 networks:
-  passkey-network:
+  passkey:

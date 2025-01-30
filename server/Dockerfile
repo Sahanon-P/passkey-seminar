@@ -31,4 +31,4 @@ COPY --from=build /app/dist /app/dist/
 COPY --from=build /app/node_modules /app/node_modules/
  
 EXPOSE 3000
-CMD  ["node", "/app/dist/src/main.js"]
+CMD  ["node", "/app/dist/main.js"]
